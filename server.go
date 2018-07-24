@@ -16,9 +16,16 @@ type Server struct {
 	UserCount   int
 	NextPeerKey int
 
-	Trace               io.Writer
+	// NOTE: When tracing, the server effectively runs in a single-threaded
+	// mode, so that we can induce a request ordering where all responses come
+	// immediately after the request that generated it.
+	TraceLock sync.Mutex
+	Trace     io.Writer
+
 	Password            string
 	MessageOfTheDayPath string
+
+	Listener net.Listener
 
 	sync.Mutex
 }
@@ -691,14 +698,15 @@ func (s *Server) NumClients() int {
 	return len(s.Peers)
 }
 
-func (s *Server) ListenAndServe(addr string) error {
+func (s *Server) Listen(addr string) error {
 	ln, err := net.Listen("tcp", addr)
-	if err != nil {
-		return err
-	}
+	s.Listener = ln
+	return err
+}
 
+func (s *Server) Serve() error {
 	for {
-		conn, err := ln.Accept()
+		conn, err := s.Listener.Accept()
 		if err != nil {
 			return err
 		}
@@ -708,6 +716,14 @@ func (s *Server) ListenAndServe(addr string) error {
 		go peer.HandleOutput()
 		go peer.HandleFlushes()
 	}
+}
+
+func (s *Server) ListenAndServe(addr string) error {
+	err := s.Listen(addr)
+	if err != nil {
+		return err
+	}
+	return s.Serve()
 }
 
 func NewServer() *Server {

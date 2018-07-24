@@ -1,0 +1,2 @@
+S <- 0  NICK
+S -> 0  :s 431 * :No nickname given

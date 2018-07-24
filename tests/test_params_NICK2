@@ -1,0 +1,3 @@
+S <- 0  USER user1 * * :User One
+S <- 0  NICK
+S -> 0  :s 431 * :No nickname given

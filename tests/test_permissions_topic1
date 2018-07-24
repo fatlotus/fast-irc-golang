@@ -1,0 +1,57 @@
+S <- 0  NICK user1
+S <- 0  USER user1 * * :User user1
+S -> 0  :s 001 user1 :Welcome to the Internet Relay Network user1!user1@foo
+S -> 0  :s 002 user1 :TBD
+S -> 0  :s 003 user1 :TBD
+S -> 0  :s 004 user1 1 2 3 4
+S -> 0  :s 251 user1 :There are 1 users and 0 services on 1 servers
+S -> 0  :s 252 user1 0 :operator(s) online
+S -> 0  :s 253 user1 0 :unknown connection(s)
+S -> 0  :s 254 user1 0 :channels formed
+S -> 0  :s 255 user1 :I have 1 clients and 0 servers
+S -> 0  :s 422 user1 :MOTD File is missing
+S <- 1  NICK user2
+S <- 1  USER user2 * * :User user2
+S -> 1  :s 001 user2 :Welcome to the Internet Relay Network user2!user2@foo
+S -> 1  :s 002 user2 :TBD
+S -> 1  :s 003 user2 :TBD
+S -> 1  :s 004 user2 1 2 3 4
+S -> 1  :s 251 user2 :There are 2 users and 0 services on 1 servers
+S -> 1  :s 252 user2 0 :operator(s) online
+S -> 1  :s 253 user2 0 :unknown connection(s)
+S -> 1  :s 254 user2 0 :channels formed
+S -> 1  :s 255 user2 :I have 2 clients and 0 servers
+S -> 1  :s 422 user2 :MOTD File is missing
+S <- 2  NICK user3
+S <- 2  USER user3 * * :User user3
+S -> 2  :s 001 user3 :Welcome to the Internet Relay Network user3!user3@foo
+S -> 2  :s 002 user3 :TBD
+S -> 2  :s 003 user3 :TBD
+S -> 2  :s 004 user3 1 2 3 4
+S -> 2  :s 251 user3 :There are 3 users and 0 services on 1 servers
+S -> 2  :s 252 user3 0 :operator(s) online
+S -> 2  :s 253 user3 0 :unknown connection(s)
+S -> 2  :s 254 user3 0 :channels formed
+S -> 2  :s 255 user3 :I have 3 clients and 0 servers
+S -> 2  :s 422 user3 :MOTD File is missing
+S <- 0  JOIN #test
+S -> 0  :user1!u@h JOIN #test
+S -> 0  :s 353 user1 = #test :@user1
+S -> 0  :s 366 user1 #test 3
+S <- 1  JOIN #test
+S -> 0  :user2!u@h JOIN #test
+S -> 1  :user2!u@h JOIN #test
+S -> 1  :s 353 user2 = #test :@user1 user2
+S -> 1  :s 366 user2 #test 3
+S <- 2  JOIN #test
+S -> 0  :user3!u@h JOIN #test
+S -> 1  :user3!u@h JOIN #test
+S -> 2  :user3!u@h JOIN #test
+S -> 2  :s 353 user3 = #test :@user1 user2 user3
+S -> 2  :s 366 user3 #test 3
+S <- 0  MODE #test +t
+S -> 0  :user1!u@h MODE #test +t
+S -> 1  :user1!u@h MODE #test +t
+S -> 2  :user1!u@h MODE #test +t
+S <- 1  TOPIC #test :Hello
+S -> 1  :s 482 user2 #test :You're not channel operator

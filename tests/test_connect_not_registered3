@@ -1,0 +1,3 @@
+S <- 0  USER user1 * * :User One
+S <- 0  PRIVMSG user2 :Hello
+S -> 0  :s 451 * :You have not registered

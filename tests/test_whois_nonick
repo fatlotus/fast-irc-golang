@@ -1,0 +1,14 @@
+S <- 0  NICK user1
+S <- 0  USER user1 * * :User One
+S -> 0  :s 001 user1 :Welcome to the Internet Relay Network user1!user1@foo
+S -> 0  :s 002 user1 :TBD
+S -> 0  :s 003 user1 :TBD
+S -> 0  :s 004 user1 1 2 3 4
+S -> 0  :s 251 user1 :There are 1 users and 0 services on 1 servers
+S -> 0  :s 252 user1 0 :operator(s) online
+S -> 0  :s 253 user1 0 :unknown connection(s)
+S -> 0  :s 254 user1 0 :channels formed
+S -> 0  :s 255 user1 :I have 1 clients and 0 servers
+S -> 0  :s 422 user1 :MOTD File is missing
+S <- 0  WHOIS user2
+S -> 0  :s 401 user1 user2 :No such nick/channel

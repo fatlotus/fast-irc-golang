@@ -1,0 +1,270 @@
+S <- 0  NICK user1
+S <- 0  USER user1 * * :User user1
+S -> 0  :s 001 user1 :Welcome to the Internet Relay Network user1!user1@foo
+S -> 0  :s 002 user1 :TBD
+S -> 0  :s 003 user1 :TBD
+S -> 0  :s 004 user1 1 2 3 4
+S -> 0  :s 251 user1 :There are 1 users and 0 services on 1 servers
+S -> 0  :s 252 user1 0 :operator(s) online
+S -> 0  :s 253 user1 0 :unknown connection(s)
+S -> 0  :s 254 user1 0 :channels formed
+S -> 0  :s 255 user1 :I have 1 clients and 0 servers
+S -> 0  :s 422 user1 :MOTD File is missing
+S <- 1  NICK user2
+S <- 1  USER user2 * * :User user2
+S -> 1  :s 001 user2 :Welcome to the Internet Relay Network user2!user2@foo
+S -> 1  :s 002 user2 :TBD
+S -> 1  :s 003 user2 :TBD
+S -> 1  :s 004 user2 1 2 3 4
+S -> 1  :s 251 user2 :There are 2 users and 0 services on 1 servers
+S -> 1  :s 252 user2 0 :operator(s) online
+S -> 1  :s 253 user2 0 :unknown connection(s)
+S -> 1  :s 254 user2 0 :channels formed
+S -> 1  :s 255 user2 :I have 2 clients and 0 servers
+S -> 1  :s 422 user2 :MOTD File is missing
+S <- 2  NICK user3
+S <- 2  USER user3 * * :User user3
+S -> 2  :s 001 user3 :Welcome to the Internet Relay Network user3!user3@foo
+S -> 2  :s 002 user3 :TBD
+S -> 2  :s 003 user3 :TBD
+S -> 2  :s 004 user3 1 2 3 4
+S -> 2  :s 251 user3 :There are 3 users and 0 services on 1 servers
+S -> 2  :s 252 user3 0 :operator(s) online
+S -> 2  :s 253 user3 0 :unknown connection(s)
+S -> 2  :s 254 user3 0 :channels formed
+S -> 2  :s 255 user3 :I have 3 clients and 0 servers
+S -> 2  :s 422 user3 :MOTD File is missing
+S <- 3  NICK user4
+S <- 3  USER user4 * * :User user4
+S -> 3  :s 001 user4 :Welcome to the Internet Relay Network user4!user4@foo
+S -> 3  :s 002 user4 :TBD
+S -> 3  :s 003 user4 :TBD
+S -> 3  :s 004 user4 1 2 3 4
+S -> 3  :s 251 user4 :There are 4 users and 0 services on 1 servers
+S -> 3  :s 252 user4 0 :operator(s) online
+S -> 3  :s 253 user4 0 :unknown connection(s)
+S -> 3  :s 254 user4 0 :channels formed
+S -> 3  :s 255 user4 :I have 4 clients and 0 servers
+S -> 3  :s 422 user4 :MOTD File is missing
+S <- 4  NICK user5
+S <- 4  USER user5 * * :User user5
+S -> 4  :s 001 user5 :Welcome to the Internet Relay Network user5!user5@foo
+S -> 4  :s 002 user5 :TBD
+S -> 4  :s 003 user5 :TBD
+S -> 4  :s 004 user5 1 2 3 4
+S -> 4  :s 251 user5 :There are 5 users and 0 services on 1 servers
+S -> 4  :s 252 user5 0 :operator(s) online
+S -> 4  :s 253 user5 0 :unknown connection(s)
+S -> 4  :s 254 user5 0 :channels formed
+S -> 4  :s 255 user5 :I have 5 clients and 0 servers
+S -> 4  :s 422 user5 :MOTD File is missing
+S <- 5  NICK user6
+S <- 5  USER user6 * * :User user6
+S -> 5  :s 001 user6 :Welcome to the Internet Relay Network user6!user6@foo
+S -> 5  :s 002 user6 :TBD
+S -> 5  :s 003 user6 :TBD
+S -> 5  :s 004 user6 1 2 3 4
+S -> 5  :s 251 user6 :There are 6 users and 0 services on 1 servers
+S -> 5  :s 252 user6 0 :operator(s) online
+S -> 5  :s 253 user6 0 :unknown connection(s)
+S -> 5  :s 254 user6 0 :channels formed
+S -> 5  :s 255 user6 :I have 6 clients and 0 servers
+S -> 5  :s 422 user6 :MOTD File is missing
+S <- 6  NICK user7
+S <- 6  USER user7 * * :User user7
+S -> 6  :s 001 user7 :Welcome to the Internet Relay Network user7!user7@foo
+S -> 6  :s 002 user7 :TBD
+S -> 6  :s 003 user7 :TBD
+S -> 6  :s 004 user7 1 2 3 4
+S -> 6  :s 251 user7 :There are 7 users and 0 services on 1 servers
+S -> 6  :s 252 user7 0 :operator(s) online
+S -> 6  :s 253 user7 0 :unknown connection(s)
+S -> 6  :s 254 user7 0 :channels formed
+S -> 6  :s 255 user7 :I have 7 clients and 0 servers
+S -> 6  :s 422 user7 :MOTD File is missing
+S <- 7  NICK user8
+S <- 7  USER user8 * * :User user8
+S -> 7  :s 001 user8 :Welcome to the Internet Relay Network user8!user8@foo
+S -> 7  :s 002 user8 :TBD
+S -> 7  :s 003 user8 :TBD
+S -> 7  :s 004 user8 1 2 3 4
+S -> 7  :s 251 user8 :There are 8 users and 0 services on 1 servers
+S -> 7  :s 252 user8 0 :operator(s) online
+S -> 7  :s 253 user8 0 :unknown connection(s)
+S -> 7  :s 254 user8 0 :channels formed
+S -> 7  :s 255 user8 :I have 8 clients and 0 servers
+S -> 7  :s 422 user8 :MOTD File is missing
+S <- 8  NICK user9
+S <- 8  USER user9 * * :User user9
+S -> 8  :s 001 user9 :Welcome to the Internet Relay Network user9!user9@foo
+S -> 8  :s 002 user9 :TBD
+S -> 8  :s 003 user9 :TBD
+S -> 8  :s 004 user9 1 2 3 4
+S -> 8  :s 251 user9 :There are 9 users and 0 services on 1 servers
+S -> 8  :s 252 user9 0 :operator(s) online
+S -> 8  :s 253 user9 0 :unknown connection(s)
+S -> 8  :s 254 user9 0 :channels formed
+S -> 8  :s 255 user9 :I have 9 clients and 0 servers
+S -> 8  :s 422 user9 :MOTD File is missing
+S <- 9  NICK user10
+S <- 9  USER user10 * * :User user10
+S -> 9  :s 001 user10 :Welcome to the Internet Relay Network user10!user10@foo
+S -> 9  :s 002 user10 :TBD
+S -> 9  :s 003 user10 :TBD
+S -> 9  :s 004 user10 1 2 3 4
+S -> 9  :s 251 user10 :There are 10 users and 0 services on 1 servers
+S -> 9  :s 252 user10 0 :operator(s) online
+S -> 9  :s 253 user10 0 :unknown connection(s)
+S -> 9  :s 254 user10 0 :channels formed
+S -> 9  :s 255 user10 :I have 10 clients and 0 servers
+S -> 9  :s 422 user10 :MOTD File is missing
+S <- 10  NICK user11
+S <- 10  USER user11 * * :User user11
+S -> 10  :s 001 user11 :Welcome to the Internet Relay Network user11!user11@foo
+S -> 10  :s 002 user11 :TBD
+S -> 10  :s 003 user11 :TBD
+S -> 10  :s 004 user11 1 2 3 4
+S -> 10  :s 251 user11 :There are 11 users and 0 services on 1 servers
+S -> 10  :s 252 user11 0 :operator(s) online
+S -> 10  :s 253 user11 0 :unknown connection(s)
+S -> 10  :s 254 user11 0 :channels formed
+S -> 10  :s 255 user11 :I have 11 clients and 0 servers
+S -> 10  :s 422 user11 :MOTD File is missing
+S <- 11  NICK user12
+S <- 11  USER user12 * * :User user12
+S -> 11  :s 001 user12 :Welcome to the Internet Relay Network user12!user12@foo
+S -> 11  :s 002 user12 :TBD
+S -> 11  :s 003 user12 :TBD
+S -> 11  :s 004 user12 1 2 3 4
+S -> 11  :s 251 user12 :There are 12 users and 0 services on 1 servers
+S -> 11  :s 252 user12 0 :operator(s) online
+S -> 11  :s 253 user12 0 :unknown connection(s)
+S -> 11  :s 254 user12 0 :channels formed
+S -> 11  :s 255 user12 :I have 12 clients and 0 servers
+S -> 11  :s 422 user12 :MOTD File is missing
+S <- 12  NICK user13
+S <- 12  USER user13 * * :User user13
+S -> 12  :s 001 user13 :Welcome to the Internet Relay Network user13!user13@foo
+S -> 12  :s 002 user13 :TBD
+S -> 12  :s 003 user13 :TBD
+S -> 12  :s 004 user13 1 2 3 4
+S -> 12  :s 251 user13 :There are 13 users and 0 services on 1 servers
+S -> 12  :s 252 user13 0 :operator(s) online
+S -> 12  :s 253 user13 0 :unknown connection(s)
+S -> 12  :s 254 user13 0 :channels formed
+S -> 12  :s 255 user13 :I have 13 clients and 0 servers
+S -> 12  :s 422 user13 :MOTD File is missing
+S <- 13  NICK user14
+S <- 13  USER user14 * * :User user14
+S -> 13  :s 001 user14 :Welcome to the Internet Relay Network user14!user14@foo
+S -> 13  :s 002 user14 :TBD
+S -> 13  :s 003 user14 :TBD
+S -> 13  :s 004 user14 1 2 3 4
+S -> 13  :s 251 user14 :There are 14 users and 0 services on 1 servers
+S -> 13  :s 252 user14 0 :operator(s) online
+S -> 13  :s 253 user14 0 :unknown connection(s)
+S -> 13  :s 254 user14 0 :channels formed
+S -> 13  :s 255 user14 :I have 14 clients and 0 servers
+S -> 13  :s 422 user14 :MOTD File is missing
+S <- 14  NICK user15
+S <- 14  USER user15 * * :User user15
+S -> 14  :s 001 user15 :Welcome to the Internet Relay Network user15!user15@foo
+S -> 14  :s 002 user15 :TBD
+S -> 14  :s 003 user15 :TBD
+S -> 14  :s 004 user15 1 2 3 4
+S -> 14  :s 251 user15 :There are 15 users and 0 services on 1 servers
+S -> 14  :s 252 user15 0 :operator(s) online
+S -> 14  :s 253 user15 0 :unknown connection(s)
+S -> 14  :s 254 user15 0 :channels formed
+S -> 14  :s 255 user15 :I have 15 clients and 0 servers
+S -> 14  :s 422 user15 :MOTD File is missing
+S <- 15  NICK user16
+S <- 15  USER user16 * * :User user16
+S -> 15  :s 001 user16 :Welcome to the Internet Relay Network user16!user16@foo
+S -> 15  :s 002 user16 :TBD
+S -> 15  :s 003 user16 :TBD
+S -> 15  :s 004 user16 1 2 3 4
+S -> 15  :s 251 user16 :There are 16 users and 0 services on 1 servers
+S -> 15  :s 252 user16 0 :operator(s) online
+S -> 15  :s 253 user16 0 :unknown connection(s)
+S -> 15  :s 254 user16 0 :channels formed
+S -> 15  :s 255 user16 :I have 16 clients and 0 servers
+S -> 15  :s 422 user16 :MOTD File is missing
+S <- 16  NICK user17
+S <- 16  USER user17 * * :User user17
+S -> 16  :s 001 user17 :Welcome to the Internet Relay Network user17!user17@foo
+S -> 16  :s 002 user17 :TBD
+S -> 16  :s 003 user17 :TBD
+S -> 16  :s 004 user17 1 2 3 4
+S -> 16  :s 251 user17 :There are 17 users and 0 services on 1 servers
+S -> 16  :s 252 user17 0 :operator(s) online
+S -> 16  :s 253 user17 0 :unknown connection(s)
+S -> 16  :s 254 user17 0 :channels formed
+S -> 16  :s 255 user17 :I have 17 clients and 0 servers
+S -> 16  :s 422 user17 :MOTD File is missing
+S <- 17  NICK user18
+S <- 17  USER user18 * * :User user18
+S -> 17  :s 001 user18 :Welcome to the Internet Relay Network user18!user18@foo
+S -> 17  :s 002 user18 :TBD
+S -> 17  :s 003 user18 :TBD
+S -> 17  :s 004 user18 1 2 3 4
+S -> 17  :s 251 user18 :There are 18 users and 0 services on 1 servers
+S -> 17  :s 252 user18 0 :operator(s) online
+S -> 17  :s 253 user18 0 :unknown connection(s)
+S -> 17  :s 254 user18 0 :channels formed
+S -> 17  :s 255 user18 :I have 18 clients and 0 servers
+S -> 17  :s 422 user18 :MOTD File is missing
+S <- 18  NICK user19
+S <- 18  USER user19 * * :User user19
+S -> 18  :s 001 user19 :Welcome to the Internet Relay Network user19!user19@foo
+S -> 18  :s 002 user19 :TBD
+S -> 18  :s 003 user19 :TBD
+S -> 18  :s 004 user19 1 2 3 4
+S -> 18  :s 251 user19 :There are 19 users and 0 services on 1 servers
+S -> 18  :s 252 user19 0 :operator(s) online
+S -> 18  :s 253 user19 0 :unknown connection(s)
+S -> 18  :s 254 user19 0 :channels formed
+S -> 18  :s 255 user19 :I have 19 clients and 0 servers
+S -> 18  :s 422 user19 :MOTD File is missing
+S <- 19  NICK user20
+S <- 19  USER user20 * * :User user20
+S -> 19  :s 001 user20 :Welcome to the Internet Relay Network user20!user20@foo
+S -> 19  :s 002 user20 :TBD
+S -> 19  :s 003 user20 :TBD
+S -> 19  :s 004 user20 1 2 3 4
+S -> 19  :s 251 user20 :There are 20 users and 0 services on 1 servers
+S -> 19  :s 252 user20 0 :operator(s) online
+S -> 19  :s 253 user20 0 :unknown connection(s)
+S -> 19  :s 254 user20 0 :channels formed
+S -> 19  :s 255 user20 :I have 20 clients and 0 servers
+S -> 19  :s 422 user20 :MOTD File is missing
+S <- 0  PING
+S -> 0  :s PONG user1
+S <- 5  PING
+S -> 5  :s PONG user6
+S <- 4  PING
+S -> 4  :s PONG user5
+S <- 3  PING
+S -> 3  :s PONG user4
+S <- 1  PING
+S -> 1  :s PONG user2
+S <- 6  PING
+S -> 6  :s PONG user7
+S <- 2  PING
+S -> 2  :s PONG user3
+S <- 7  PING
+S -> 7  :s PONG user8
+S <- 8  PING
+S -> 8  :s PONG user9
+S <- 9  PING
+S -> 9  :s PONG user10
+S <- 10  PING
+S -> 10  :s PONG user11
+S <- 11  PING
+S -> 11  :s PONG user12
+S <- 12  PING
+S -> 12  :s PONG user13
+S <- 13  PING
+S -> 13  :s PONG user14
+S <- 14  PING
+S -> 14  :s PONG user15

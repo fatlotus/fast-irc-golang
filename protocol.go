@@ -12,7 +12,7 @@ func (p *Peer) HandleFlushes() {
 		select {
 		case p.Output <- "":
 		default:
-			fmt.Printf("stopping flusher thread\n")
+			// fmt.Printf("stopping flusher thread\n")
 			return
 		}
 		time.Sleep(1 * time.Millisecond)
@@ -22,6 +22,8 @@ func (p *Peer) HandleFlushes() {
 func (p *Peer) Write(msg string) {
 	if p.Server.Trace != nil {
 		fmt.Fprintf(p.Server.Trace, "S -> %d  %s\n", p.Key, msg[:len(msg)-2])
+		p.Conn.Write([]byte(msg))
+		return
 	}
 
 	select {
@@ -78,6 +80,7 @@ func (p *Peer) HandleInput() {
 		line := sc.Bytes()
 
 		if p.Server.Trace != nil {
+			p.Server.TraceLock.Lock()
 			fmt.Fprintf(p.Server.Trace, "S <- %d  %s\n", p.Key, line)
 		}
 
@@ -149,6 +152,10 @@ func (p *Peer) HandleInput() {
 			if _, ok := err.(*Quitting); ok {
 				break
 			}
+		}
+
+		if p.Server.Trace != nil {
+			p.Server.TraceLock.Unlock()
 		}
 	}
 	if sc.Err() != nil {

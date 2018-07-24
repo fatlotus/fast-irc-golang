@@ -1,0 +1,12 @@
+S <- 0  NICK nick4242
+S <- 0  USER user4242 * * :User Four Thousand Two Hundred and Forty Two
+S -> 0  :s 001 nick4242 :Welcome to the Internet Relay Network nick4242!user4242@foo
+S -> 0  :s 002 nick4242 :TBD
+S -> 0  :s 003 nick4242 :TBD
+S -> 0  :s 004 nick4242 1 2 3 4
+S -> 0  :s 251 nick4242 :There are 1 users and 0 services on 1 servers
+S -> 0  :s 252 nick4242 0 :operator(s) online
+S -> 0  :s 253 nick4242 0 :unknown connection(s)
+S -> 0  :s 254 nick4242 0 :channels formed
+S -> 0  :s 255 nick4242 :I have 1 clients and 0 servers
+S -> 0  :s 422 nick4242 :MOTD File is missing

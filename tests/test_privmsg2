@@ -1,0 +1,224 @@
+S <- 0  NICK user1
+S <- 0  USER user1 * * :User One
+S -> 0  :s 001 user1 :Welcome to the Internet Relay Network user1!user1@foo
+S -> 0  :s 002 user1 :TBD
+S -> 0  :s 003 user1 :TBD
+S -> 0  :s 004 user1 1 2 3 4
+S -> 0  :s 251 user1 :There are 1 users and 0 services on 1 servers
+S -> 0  :s 252 user1 0 :operator(s) online
+S -> 0  :s 253 user1 0 :unknown connection(s)
+S -> 0  :s 254 user1 0 :channels formed
+S -> 0  :s 255 user1 :I have 1 clients and 0 servers
+S -> 0  :s 422 user1 :MOTD File is missing
+S <- 1  NICK user2
+S <- 1  USER user2 * * :User Two
+S -> 1  :s 001 user2 :Welcome to the Internet Relay Network user2!user2@foo
+S -> 1  :s 002 user2 :TBD
+S -> 1  :s 003 user2 :TBD
+S -> 1  :s 004 user2 1 2 3 4
+S -> 1  :s 251 user2 :There are 2 users and 0 services on 1 servers
+S -> 1  :s 252 user2 0 :operator(s) online
+S -> 1  :s 253 user2 0 :unknown connection(s)
+S -> 1  :s 254 user2 0 :channels formed
+S -> 1  :s 255 user2 :I have 2 clients and 0 servers
+S -> 1  :s 422 user2 :MOTD File is missing
+S <- 0  PRIVMSG user2 :Message 1
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 1
+S <- 0  PRIVMSG user2 :Message 2
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 2
+S <- 0  PRIVMSG user2 :Message 3
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 3
+S <- 0  PRIVMSG user2 :Message 4
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 4
+S <- 0  PRIVMSG user2 :Message 5
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 5
+S <- 0  PRIVMSG user2 :Message 6
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 6
+S <- 0  PRIVMSG user2 :Message 7
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 7
+S <- 0  PRIVMSG user2 :Message 8
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 8
+S <- 0  PRIVMSG user2 :Message 9
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 9
+S <- 0  PRIVMSG user2 :Message 10
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 10
+S <- 0  PRIVMSG user2 :Message 11
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 11
+S <- 0  PRIVMSG user2 :Message 12
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 12
+S <- 0  PRIVMSG user2 :Message 13
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 13
+S <- 0  PRIVMSG user2 :Message 14
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 14
+S <- 0  PRIVMSG user2 :Message 15
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 15
+S <- 0  PRIVMSG user2 :Message 16
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 16
+S <- 0  PRIVMSG user2 :Message 17
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 17
+S <- 0  PRIVMSG user2 :Message 18
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 18
+S <- 0  PRIVMSG user2 :Message 19
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 19
+S <- 0  PRIVMSG user2 :Message 20
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 20
+S <- 0  PRIVMSG user2 :Message 21
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 21
+S <- 0  PRIVMSG user2 :Message 22
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 22
+S <- 0  PRIVMSG user2 :Message 23
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 23
+S <- 0  PRIVMSG user2 :Message 24
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 24
+S <- 0  PRIVMSG user2 :Message 25
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 25
+S <- 0  PRIVMSG user2 :Message 26
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 26
+S <- 0  PRIVMSG user2 :Message 27
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 27
+S <- 0  PRIVMSG user2 :Message 28
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 28
+S <- 0  PRIVMSG user2 :Message 29
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 29
+S <- 0  PRIVMSG user2 :Message 30
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 30
+S <- 0  PRIVMSG user2 :Message 31
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 31
+S <- 0  PRIVMSG user2 :Message 32
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 32
+S <- 0  PRIVMSG user2 :Message 33
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 33
+S <- 0  PRIVMSG user2 :Message 34
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 34
+S <- 0  PRIVMSG user2 :Message 35
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 35
+S <- 0  PRIVMSG user2 :Message 36
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 36
+S <- 0  PRIVMSG user2 :Message 37
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 37
+S <- 0  PRIVMSG user2 :Message 38
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 38
+S <- 0  PRIVMSG user2 :Message 39
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 39
+S <- 0  PRIVMSG user2 :Message 40
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 40
+S <- 0  PRIVMSG user2 :Message 41
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 41
+S <- 0  PRIVMSG user2 :Message 42
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 42
+S <- 0  PRIVMSG user2 :Message 43
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 43
+S <- 0  PRIVMSG user2 :Message 44
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 44
+S <- 0  PRIVMSG user2 :Message 45
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 45
+S <- 0  PRIVMSG user2 :Message 46
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 46
+S <- 0  PRIVMSG user2 :Message 47
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 47
+S <- 0  PRIVMSG user2 :Message 48
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 48
+S <- 0  PRIVMSG user2 :Message 49
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 49
+S <- 0  PRIVMSG user2 :Message 50
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 50
+S <- 0  PRIVMSG user2 :Message 51
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 51
+S <- 0  PRIVMSG user2 :Message 52
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 52
+S <- 0  PRIVMSG user2 :Message 53
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 53
+S <- 0  PRIVMSG user2 :Message 54
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 54
+S <- 0  PRIVMSG user2 :Message 55
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 55
+S <- 0  PRIVMSG user2 :Message 56
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 56
+S <- 0  PRIVMSG user2 :Message 57
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 57
+S <- 0  PRIVMSG user2 :Message 58
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 58
+S <- 0  PRIVMSG user2 :Message 59
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 59
+S <- 0  PRIVMSG user2 :Message 60
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 60
+S <- 0  PRIVMSG user2 :Message 61
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 61
+S <- 0  PRIVMSG user2 :Message 62
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 62
+S <- 0  PRIVMSG user2 :Message 63
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 63
+S <- 0  PRIVMSG user2 :Message 64
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 64
+S <- 0  PRIVMSG user2 :Message 65
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 65
+S <- 0  PRIVMSG user2 :Message 66
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 66
+S <- 0  PRIVMSG user2 :Message 67
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 67
+S <- 0  PRIVMSG user2 :Message 68
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 68
+S <- 0  PRIVMSG user2 :Message 69
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 69
+S <- 0  PRIVMSG user2 :Message 70
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 70
+S <- 0  PRIVMSG user2 :Message 71
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 71
+S <- 0  PRIVMSG user2 :Message 72
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 72
+S <- 0  PRIVMSG user2 :Message 73
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 73
+S <- 0  PRIVMSG user2 :Message 74
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 74
+S <- 0  PRIVMSG user2 :Message 75
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 75
+S <- 0  PRIVMSG user2 :Message 76
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 76
+S <- 0  PRIVMSG user2 :Message 77
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 77
+S <- 0  PRIVMSG user2 :Message 78
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 78
+S <- 0  PRIVMSG user2 :Message 79
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 79
+S <- 0  PRIVMSG user2 :Message 80
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 80
+S <- 0  PRIVMSG user2 :Message 81
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 81
+S <- 0  PRIVMSG user2 :Message 82
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 82
+S <- 0  PRIVMSG user2 :Message 83
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 83
+S <- 0  PRIVMSG user2 :Message 84
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 84
+S <- 0  PRIVMSG user2 :Message 85
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 85
+S <- 0  PRIVMSG user2 :Message 86
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 86
+S <- 0  PRIVMSG user2 :Message 87
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 87
+S <- 0  PRIVMSG user2 :Message 88
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 88
+S <- 0  PRIVMSG user2 :Message 89
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 89
+S <- 0  PRIVMSG user2 :Message 90
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 90
+S <- 0  PRIVMSG user2 :Message 91
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 91
+S <- 0  PRIVMSG user2 :Message 92
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 92
+S <- 0  PRIVMSG user2 :Message 93
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 93
+S <- 0  PRIVMSG user2 :Message 94
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 94
+S <- 0  PRIVMSG user2 :Message 95
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 95
+S <- 0  PRIVMSG user2 :Message 96
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 96
+S <- 0  PRIVMSG user2 :Message 97
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 97
+S <- 0  PRIVMSG user2 :Message 98
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 98
+S <- 0  PRIVMSG user2 :Message 99
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 99
+S <- 0  PRIVMSG user2 :Message 100
+S -> 1  :user1!user1@c PRIVMSG user2 :Message 100

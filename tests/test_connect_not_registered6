@@ -1,0 +1,2 @@
+S <- 0  USER user1 * * :User One
+S <- 0  WHOWAS user2
