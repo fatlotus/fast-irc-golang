@@ -25,6 +25,7 @@ func main() {
 
 		// drain the buffers from A?
 		b.PrivMsg("a", buf)
+		b.Writer.Flush()
 		a.ReadMsg()
 
 		c := 50000 // 00

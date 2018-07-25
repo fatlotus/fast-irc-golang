@@ -100,6 +100,9 @@ func RunTestCase(addr string, inputs []string) ([]string, error) {
 			}
 		}
 	}
+	for _, conn := range conns {
+		conn.Close()
+	}
 	return result, nil
 }
 

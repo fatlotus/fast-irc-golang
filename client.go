@@ -15,7 +15,6 @@ type Client struct {
 
 func (c *Client) PrivMsg(nick, message string) {
 	fmt.Fprintf(c.Writer, "PRIVMSG %s :%s\r\n", nick, message)
-	c.Writer.Flush()
 }
 
 func (c *Client) ReadMsg() {
@@ -27,7 +26,7 @@ func (c *Client) ReadMsg() {
 		if strings.Contains(line, "PRIVMSG") {
 			return
 		} else {
-			fmt.Printf("> %s\n", strings.TrimSpace(line))
+			// fmt.Printf("> %s\n", strings.TrimSpace(line))
 		}
 	}
 }
