@@ -171,6 +171,20 @@ func RunTestCase(motd string, addr string, inputs []string) ([]string, error) {
 	return result, nil
 }
 
+func CheckForLeaks(s *Server, t *testing.T) {
+	// make sure we didn't leave and dangling references
+	time.Sleep(10 * time.Millisecond)
+	if len(s.Peers) != 0 {
+		t.Errorf("leaked peers: %#v\n", s.Peers)
+	}
+	if len(s.Nicks) != 0 {
+		t.Errorf("leaked nicks: %#v\n", s.Nicks)
+	}
+	if len(s.Rooms) != 0 {
+		t.Errorf("leaked rooms: %#v\n", s.Rooms)
+	}
+}
+
 func RunTestFile(path string, t *testing.T) error {
 	// create a temporary motd file
 	tmpdir, err := ioutil.TempDir("", "motd")
@@ -203,6 +217,8 @@ func RunTestFile(path string, t *testing.T) error {
 	if err != nil {
 		return err
 	}
+
+	CheckForLeaks(s, t)
 
 	actual = NormalizeTestCase(actual)
 	expected = NormalizeTestCase(expected)

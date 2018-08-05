@@ -65,24 +65,26 @@ func (s *Server) RegisteredUser(p *Peer) {
 }
 
 func (s *Server) Quit(p *Peer, message string) error {
+	s.Lock()
+	defer s.Unlock()
+
 	if message == "" {
 		message = "Client Quit"
 	}
-	for _, room := range s.Rooms {
-		found := false
+	// fixme: remove copy
+	toremove := map[string]*Room{}
+	for name, room := range s.Rooms {
+		if room.ContainsMember(p) {
+			toremove[name] = room
+		}
+	}
+	for name, room := range toremove {
 		for _, member := range room.Members {
-			if member == p {
-				found = true
-				break
+			if member != p {
+				member.SayFrom(p.Nick+"!u@h", "QUIT :%s", message)
 			}
 		}
-		if found {
-			for _, member := range room.Members {
-				if member != p {
-					member.SayFrom(p.Nick+"!u@h", "QUIT :%s", message)
-				}
-			}
-		}
+		room.RemoveMember(s, name, p)
 	}
 
 	return &Quitting{message}
@@ -116,13 +118,7 @@ func (s *Server) SetNick(p *Peer, nick string) error {
 	}
 
 	for _, room := range s.Rooms {
-		found := false
-		for _, member := range room.Members {
-			if member == p {
-				found = true
-			}
-		}
-		if found {
+		if room.ContainsMember(p) {
 			for _, member := range room.Members {
 				member.SayFrom(p.Nick+"!u@h", "NICK :%s", nick)
 			}
@@ -151,27 +147,25 @@ func (s *Server) Whois(sender *Peer, nick string) error {
 
 	channels := ""
 	for channel, room := range s.Rooms {
-		for _, member := range room.Members {
-			if member == subject {
-				ismod := false
-				isvoice := false
-				for _, modroom := range subject.IsModOf {
-					if modroom == channel {
-						ismod = true
-					}
+		if room.ContainsMember(subject) {
+			ismod := false
+			isvoice := false
+			for _, modroom := range subject.IsModOf {
+				if modroom == channel {
+					ismod = true
 				}
-				for _, speaker := range room.Speakers {
-					if speaker == member {
-						isvoice = true
-					}
+			}
+			for _, speaker := range room.Speakers {
+				if speaker == subject {
+					isvoice = true
 				}
-				if ismod {
-					channels += "@" + channel + " "
-				} else if isvoice {
-					channels += "+" + channel + " "
-				} else {
-					channels += channel + " "
-				}
+			}
+			if ismod {
+				channels += "@" + channel + " "
+			} else if isvoice {
+				channels += "+" + channel + " "
+			} else {
+				channels += channel + " "
 			}
 		}
 	}
@@ -202,13 +196,7 @@ func (s *Server) SetTopic(sender *Peer, channel, topic string) error {
 		return &NotOnChannel{sender.Nick, channel}
 	}
 
-	found := false
-	for _, member := range room.Members {
-		if member == sender {
-			found = true
-		}
-	}
-	if !found {
+	if !room.ContainsMember(sender) {
 		return &NotOnChannel{sender.Nick, channel}
 	}
 
@@ -233,14 +221,7 @@ func (s *Server) GetTopic(sender *Peer, channel string) (string, error) {
 		return "", &NotOnChannel{sender.Nick, channel}
 	}
 
-	found := false
-	for _, member := range room.Members {
-		if member == sender {
-			found = true
-			break
-		}
-	}
-	if !found {
+	if !room.ContainsMember(sender) {
 		return "", &NotOnChannel{sender.Nick, channel}
 	}
 
@@ -266,23 +247,10 @@ func (s *Server) Part(sender *Peer, name, message string) error {
 		}
 	}
 
-	found := false
-	for i, member := range room.Members {
-		if member == sender {
-			room.Members = append(
-				room.Members[:i], room.Members[i+1:]...)
-			found = true
-			break
-		}
-	}
-
-	if !found {
+	if !room.ContainsMember(sender) {
 		return &NotOnChannel{sender.Nick, name}
 	}
-
-	if len(room.Members) == 0 {
-		delete(s.Rooms, name)
-	}
+	room.RemoveMember(s, name, sender)
 	return nil
 }
 
@@ -411,17 +379,7 @@ func (s *Server) WhoAll(sender *Peer) error {
 	for _, member := range s.Peers {
 		mutual := false
 		for _, room := range s.Rooms {
-			has_sender := false
-			has_member := false
-			for _, mem := range room.Members {
-				if mem == sender {
-					has_sender = true
-				}
-				if mem == member {
-					has_member = true
-				}
-			}
-			if has_sender && has_member {
+			if room.ContainsMember(sender) && room.ContainsMember(member) {
 				mutual = true
 				break
 			}
@@ -463,10 +421,8 @@ func (s *Server) Join(sender *Peer, name string) error {
 		s.Rooms[name] = room
 		sender.IsModOf = append(sender.IsModOf, name)
 	}
-	for _, member := range room.Members {
-		if member == sender {
-			return nil
-		}
+	if room.ContainsMember(sender) {
+		return nil
 	}
 	room.Members = append(room.Members, sender)
 
@@ -495,13 +451,7 @@ func (s *Server) SendMessage(cmd string, sender *Peer, nick, message string) err
 		}
 
 		// Make sure the user has joined the channel already.
-		found := false
-		for _, member := range room.Members {
-			if member == sender {
-				found = true
-			}
-		}
-		if !found {
+		if !room.ContainsMember(sender) {
 			return &CannotSendToChannel{sender.Nick, nick}
 		}
 

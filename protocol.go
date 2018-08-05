@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"strings"
 )
 
@@ -87,10 +86,12 @@ func (p *Peer) HandleInput() {
 	sc.Split(bufio.ScanLines)
 	for sc.Scan() {
 		if p.HandleLine(sc.Bytes()) {
-			break
+			return
 		}
 	}
 	if sc.Err() != nil {
-		log.Print(sc.Err())
+		p.Server.Quit(p, sc.Err().Error())
+	} else {
+		p.Server.Quit(p, "dropped connection")
 	}
 }
