@@ -10,6 +10,7 @@ S -> 0  :s 253 user1 0 :unknown connection(s)
 S -> 0  :s 254 user1 0 :channels formed
 S -> 0  :s 255 user1 :I have 1 clients and 0 servers
 S -> 0  :s 422 user1 :MOTD File is missing
+S motd  AAA$BBB$CCC$DDD
 S <- 0  MOTD
 S -> 0  :s 375 user1 :- Today's Message of the day - 
 S -> 0  :s 372 user1 :- AAA

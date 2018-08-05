@@ -22,5 +22,7 @@ S -> 1  :s 253 user2 0 :unknown connection(s)
 S -> 1  :s 254 user2 0 :channels formed
 S -> 1  :s 255 user2 :I have 2 clients and 0 servers
 S -> 1  :s 422 user2 :MOTD File is missing
+S <- 0  QUIT :See ya later!
+S -> 0  :s ERROR :Closing Link: user said (See ya later!)
 S <- 1  QUIT :Leaving
 S -> 1  :s ERROR :Closing Link: user said (Leaving)

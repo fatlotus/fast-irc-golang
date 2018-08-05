@@ -152,26 +152,26 @@ S -> 8  :user9!u@h JOIN #test3
 S -> 8  :s 353 user9 = #test3 :@user7 user8 user9
 S -> 8  :s 366 user9 #test3 3
 S <- 0  WHO *
+S -> 0  :s 352 user1 * 2 3 4 user8 H 7
+S -> 0  :s 352 user1 * 2 3 4 user4 H 7
 S -> 0  :s 352 user1 * 2 3 4 user5 H 7
 S -> 0  :s 352 user1 * 2 3 4 user7 H 7
-S -> 0  :s 352 user1 * 2 3 4 user8 H 7
-S -> 0  :s 352 user1 * 2 3 4 user9 H 7
-S -> 0  :s 352 user1 * 2 3 4 user4 H 7
 S -> 0  :s 352 user1 * 2 3 4 user6 H 7
+S -> 0  :s 352 user1 * 2 3 4 user9 H 7
 S -> 0  :s 315 user1 * :End of WHO list
 S <- 3  WHO *
-S -> 3  :s 352 user4 * 2 3 4 user1 H 7
-S -> 3  :s 352 user4 * 2 3 4 user3 H 7
 S -> 3  :s 352 user4 * 2 3 4 user2 H 7
+S -> 3  :s 352 user4 * 2 3 4 user3 H 7
 S -> 3  :s 352 user4 * 2 3 4 user7 H 7
 S -> 3  :s 352 user4 * 2 3 4 user8 H 7
+S -> 3  :s 352 user4 * 2 3 4 user1 H 7
 S -> 3  :s 352 user4 * 2 3 4 user9 H 7
 S -> 3  :s 315 user4 * :End of WHO list
 S <- 6  WHO *
 S -> 6  :s 352 user7 * 2 3 4 user1 H 7
-S -> 6  :s 352 user7 * 2 3 4 user3 H 7
-S -> 6  :s 352 user7 * 2 3 4 user4 H 7
 S -> 6  :s 352 user7 * 2 3 4 user6 H 7
 S -> 6  :s 352 user7 * 2 3 4 user2 H 7
+S -> 6  :s 352 user7 * 2 3 4 user3 H 7
+S -> 6  :s 352 user7 * 2 3 4 user4 H 7
 S -> 6  :s 352 user7 * 2 3 4 user5 H 7
 S -> 6  :s 315 user7 * :End of WHO list

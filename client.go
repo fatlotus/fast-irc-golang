@@ -25,8 +25,6 @@ func (c *Client) ReadMsg() {
 		}
 		if strings.Contains(line, "PRIVMSG") {
 			return
-		} else {
-			// fmt.Printf("> %s\n", strings.TrimSpace(line))
 		}
 	}
 }

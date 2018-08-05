@@ -224,9 +224,9 @@ S <- 2  MODE #test5 +o user5
 S -> 2  :user1!u@h MODE #test5 +o user5
 S -> 6  :user1!u@h MODE #test5 +o user5
 S <- 2  LIST
-S -> 2  :s 322 user1 #test5 2 :No topic set
 S -> 2  :s 322 user1 #test1 3 :No topic set
 S -> 2  :s 322 user1 #test2 1 :No topic set
 S -> 2  :s 322 user1 #test3 4 :No topic set
 S -> 2  :s 322 user1 #test4 5 :No topic set
+S -> 2  :s 322 user1 #test5 2 :No topic set
 S -> 2  :s 323 user1 :End of LIST

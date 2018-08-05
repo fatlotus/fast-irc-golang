@@ -120,11 +120,11 @@ S -> 9  :s 255 user10 :I have 10 clients and 0 servers
 S -> 9  :s 422 user10 :MOTD File is missing
 S <- 0  PING
 S -> 0  :s PONG user1
-S <- 2  PING
-S -> 2  :s PONG user3
-S <- 1  PING
-S -> 1  :s PONG user2
 S <- 4  PING
 S -> 4  :s PONG user5
+S <- 2  PING
+S -> 2  :s PONG user3
 S <- 3  PING
 S -> 3  :s PONG user4
+S <- 1  PING
+S -> 1  :s PONG user2

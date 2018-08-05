@@ -240,18 +240,18 @@ S -> 19  :s 255 user20 :I have 20 clients and 0 servers
 S -> 19  :s 422 user20 :MOTD File is missing
 S <- 0  PING
 S -> 0  :s PONG user1
-S <- 5  PING
-S -> 5  :s PONG user6
 S <- 4  PING
 S -> 4  :s PONG user5
 S <- 3  PING
 S -> 3  :s PONG user4
 S <- 1  PING
 S -> 1  :s PONG user2
-S <- 6  PING
-S -> 6  :s PONG user7
 S <- 2  PING
 S -> 2  :s PONG user3
+S <- 5  PING
+S -> 5  :s PONG user6
+S <- 6  PING
+S -> 6  :s PONG user7
 S <- 7  PING
 S -> 7  :s PONG user8
 S <- 8  PING

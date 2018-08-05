@@ -21,6 +21,7 @@ type Server struct {
 	// immediately after the request that generated it.
 	TraceLock sync.Mutex
 	Trace     io.Writer
+	LastMotd  string
 
 	Password            string
 	MessageOfTheDayPath string
@@ -713,8 +714,6 @@ func (s *Server) Serve() error {
 		conn.(*net.TCPConn).SetNoDelay(false)
 		peer := s.AddPeer(conn)
 		go peer.HandleInput()
-		go peer.HandleOutput()
-		go peer.HandleFlushes()
 	}
 }
 

@@ -225,6 +225,6 @@ S -> 2  :user1!u@h MODE #test5 +o user5
 S -> 6  :user1!u@h MODE #test5 +o user5
 S <- 2  WHOIS user2
 S -> 2  :s 311 user1 1 2 3 4 :user2
-S -> 2  :s 319 user1 1 :@#test2 #test4 #test1 
+S -> 2  :s 319 user1 1 :#test1 @#test2 #test4 
 S -> 2  :s 312 user1 1 2 3
 S -> 2  :s 318 user1 1 :End of WHOIS list

@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net"
+	"os"
+	"sort"
 	"strconv"
 	"strings"
 	"sync"
@@ -15,7 +17,64 @@ import (
 	"github.com/andreyvit/diff"
 )
 
-func RunTestCase(addr string, inputs []string) ([]string, error) {
+func NormalizeLine(message string) (string, string) {
+	wrapper := strings.SplitN(message, " ", 5)
+
+	// client to server messages
+	if len(wrapper) < 2 || wrapper[1] != "->" {
+		return "", message
+	}
+	unpacked := strings.SplitN(wrapper[4], " ", 2)
+
+	// relayed message
+	if strings.Contains(unpacked[0], "@") {
+		return "", message
+	}
+
+	// parse out the opcode if it is a server to client message
+	phrases := strings.SplitN(unpacked[1], ":", 2)
+	words := strings.Split(phrases[0], " ")
+
+	if words[0] == "319" || words[0] == "353" {
+		members := strings.Split(" ", phrases[1])
+		sort.Strings(members)
+		return words[0], fmt.Sprintf(
+			"S -> %s  %s %s:%s",
+			wrapper[2], unpacked[0], phrases[0], strings.Join(members, " "))
+	}
+
+	return words[0], message
+}
+
+var canReorderResponses = map[string]bool{
+	"322": true, // RPL_LIST
+	"352": true, // RPL_WHOREPLY
+	"353": true, // RPL_NAMEREPLY
+}
+
+func NormalizeTestCase(lines []string) []string {
+	result := []string{}
+	buffer := []string{}
+	lastop := ""
+	for _, line := range lines {
+		op, line := NormalizeLine(line)
+		if op != lastop || op == "" {
+			if canReorderResponses[lastop] {
+				sort.Strings(buffer)
+			}
+			result = append(result, buffer...)
+			buffer = buffer[:0]
+			lastop = op
+		}
+		buffer = append(buffer, line)
+	}
+	if canReorderResponses[lastop] {
+		sort.Strings(buffer)
+	}
+	return append(result, buffer...)
+}
+
+func RunTestCase(motd string, addr string, inputs []string) ([]string, error) {
 	result := []string{}
 	conns := []net.Conn{}
 
@@ -24,7 +83,14 @@ func RunTestCase(addr string, inputs []string) ([]string, error) {
 		if len(frags) < 3 {
 			continue
 		}
-		if frags[1] != "<-" {
+		if frags[1] == "motd" {
+			buf := []byte(strings.Replace(frags[3], "$", "\n", -1))
+			if err := ioutil.WriteFile(motd, buf, 0600); err != nil {
+				return nil, err
+			}
+			result = append(result, line)
+			continue
+		} else if frags[1] != "<-" {
 			continue
 		}
 
@@ -53,7 +119,6 @@ func RunTestCase(addr string, inputs []string) ([]string, error) {
 		}
 
 		// write the message over the socket
-		fmt.Printf(".")
 		result = append(result, fmt.Sprintf("S <- %d  %s", cid, frags[4]))
 		fmt.Fprintf(conns[cid], "%s\r\n", frags[4])
 
@@ -107,11 +172,19 @@ func RunTestCase(addr string, inputs []string) ([]string, error) {
 }
 
 func RunTestFile(path string, t *testing.T) error {
+	// create a temporary motd file
+	tmpdir, err := ioutil.TempDir("", "motd")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer os.RemoveAll(tmpdir)
+
 	// set up a local instance of the server
 	s := NewServer()
 	s.Password = "foobar"
-	err := s.Listen(":0")
-	if err != nil {
+	s.MessageOfTheDayPath = tmpdir + "/motd.txt"
+	if err := s.Listen(":0"); err != nil {
 		t.Fatal(err)
 	}
 	defer s.Listener.Close()
@@ -124,24 +197,29 @@ func RunTestFile(path string, t *testing.T) error {
 	if err != nil {
 		return err
 	}
-	expected := strings.Split(string(text), "\n")
+	expected := strings.Split(string(text[:len(text)-1]), "\n")
 
-	actual, err := RunTestCase(addr, expected)
+	actual, err := RunTestCase(tmpdir+"/motd.txt", addr, expected)
 	if err != nil {
 		return err
 	}
 
-	passed := true
-	for i, actual_line := range actual {
-		if actual_line != expected[i] {
-			t.Fail()
-			passed = false
-		}
-	}
+	actual = NormalizeTestCase(actual)
+	expected = NormalizeTestCase(expected)
 
-	if passed {
-		fmt.Printf(":")
-		return nil
+	if len(actual) != len(expected) {
+		t.Fail()
+	} else {
+		passed := true
+		for i, actual_line := range actual {
+			if actual_line != expected[i] {
+				t.Fail()
+				passed = false
+			}
+		}
+		if passed {
+			return nil
+		}
 	}
 
 	fmt.Printf("\nFAIL %s:\n", path)
@@ -165,6 +243,10 @@ func TestServer(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, test := range tests {
-		RunTestFile("tests/"+test.Name(), t)
+		name := test.Name()
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			RunTestFile("tests/"+name, t)
+		})
 	}
 }

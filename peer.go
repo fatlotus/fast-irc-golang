@@ -35,7 +35,7 @@ func (p *Peer) NickOrAsterix() string {
 }
 
 func (p *Peer) SendMotd() {
-	motd, err := os.Open("motd.txt")
+	motd, err := os.Open(p.Server.MessageOfTheDayPath)
 	if err != nil {
 		p.Say("422 %s :MOTD File is missing", p.Nick)
 		return
@@ -47,7 +47,6 @@ func (p *Peer) SendMotd() {
 	sc := bufio.NewScanner(motd)
 	sc.Split(bufio.ScanLines)
 	for sc.Scan() {
-		fmt.Printf("line: %s\n", sc.Text())
 		p.Say("372 %s :- %s", p.Nick, sc.Text())
 	}
 	p.Say("376 %s :End of MOTD command", p.Nick)
