@@ -171,7 +171,7 @@ func RunTestCase(motd string, addr string, inputs []string) ([]string, error) {
 	return result, nil
 }
 
-func CheckForLeaks(s *Server, t *testing.T) {
+func CheckForServerLeaks(s *Server, t *testing.T) {
 	// make sure we didn't leave and dangling references
 	time.Sleep(10 * time.Millisecond)
 	if len(s.Peers) != 0 {
@@ -218,7 +218,7 @@ func RunTestFile(path string, t *testing.T) error {
 		return err
 	}
 
-	CheckForLeaks(s, t)
+	CheckForServerLeaks(s, t)
 
 	actual = NormalizeTestCase(actual)
 	expected = NormalizeTestCase(expected)

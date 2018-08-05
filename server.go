@@ -439,12 +439,12 @@ func (s *Server) Join(sender *Peer, name string) error {
 }
 
 func (s *Server) SendMessage(cmd string, sender *Peer, nick, message string) error {
+	msg := fmt.Sprintf(":%s!%s@c %s %s :%s\r\n", sender.Nick, sender.User, cmd, nick, message)
+
 	s.Lock()
 	defer s.Unlock()
 
 	if nick[0] == '#' {
-		msg := fmt.Sprintf(":%s!%s@c %s %s :%s\r\n", sender.Nick, sender.User, cmd, nick, message)
-
 		room, exists := s.Rooms[nick]
 		if !exists {
 			return &NoSuchUser{sender.Nick, nick}
@@ -483,8 +483,6 @@ func (s *Server) SendMessage(cmd string, sender *Peer, nick, message string) err
 		if peer.Away != "" {
 			return &PeerIsAway{sender.Nick, nick, peer.Away}
 		}
-
-		msg := fmt.Sprintf(":%s!%s@c %s %s :%s\r\n", sender.Nick, sender.User, cmd, nick, message)
 		peer.Write(msg)
 	}
 	return nil

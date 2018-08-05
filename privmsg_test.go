@@ -1,8 +1,8 @@
 package irc_go_test
 
 import (
-	// "io/ioutil"
-	// "fmt"
+	"fmt"
+	"sync"
 	"testing"
 
 	. "github.com/fatlotus/irc_go"
@@ -55,30 +55,44 @@ func BenchmarkPrivmsgLocalSocket(b *testing.B) {
 	addr := s.Listener.Addr().String()
 	go s.Serve()
 
-	client_a, err := NewClient("a", addr)
-	if err != nil {
-		b.Fatal(err)
-	}
-	client_b, err := NewClient("b", addr)
-	if err != nil {
-		b.Fatal(err)
+	streams := 10
+	wg := sync.WaitGroup{}
+	for s := 0; s < streams; s++ {
+		wg.Add(1)
+		go func(s int) {
+			defer wg.Done()
+
+			name_a := fmt.Sprintf("a%d", s)
+			name_b := fmt.Sprintf("b%d", s)
+
+			client_a, err := NewClient(name_a, addr)
+			if err != nil {
+				b.Fatal(err)
+			}
+			client_b, err := NewClient(name_b, addr)
+			if err != nil {
+				b.Fatal(err)
+			}
+
+			client_b.PrivMsg(name_a, "x")
+			client_b.Writer.Flush()
+			client_a.ReadMsg()
+
+			batch := 200
+			for i := 0; i < b.N/streams; i += batch {
+				for i := 0; i < batch; i++ {
+					client_a.PrivMsg(name_b, "hi")
+				}
+				client_a.Writer.Flush()
+				for i := 0; i < batch; i++ {
+					client_b.ReadMsg()
+				}
+			}
+
+			client_a.Close()
+			client_b.Close()
+		}(s)
 	}
 
-	client_b.PrivMsg("a", "x")
-	client_b.Writer.Flush()
-	client_a.ReadMsg()
-
-	qd := 200
-	for i := 0; i < b.N; i += qd {
-		for i := 0; i < qd; i++ {
-			client_a.PrivMsg("b", "hi")
-		}
-		client_a.Writer.Flush()
-		for i := 0; i < qd; i++ {
-			client_b.ReadMsg()
-		}
-	}
-
-	client_a.Close()
-	client_b.Close()
+	wg.Wait()
 }
