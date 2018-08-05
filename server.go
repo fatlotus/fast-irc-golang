@@ -417,14 +417,14 @@ func (s *Server) Join(sender *Peer, name string) error {
 
 	room, exists := s.Rooms[name]
 	if !exists {
-		room = &Room{}
+		room = &Room{Members: map[int]*Peer{}}
 		s.Rooms[name] = room
 		sender.IsModOf = append(sender.IsModOf, name)
 	}
 	if room.ContainsMember(sender) {
 		return nil
 	}
-	room.Members = append(room.Members, sender)
+	room.AddMember(sender)
 
 	for _, member := range room.Members {
 		member.SayFrom(sender.Nick+"!u@h", "JOIN %s", name)

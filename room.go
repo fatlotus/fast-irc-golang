@@ -5,7 +5,7 @@ import (
 )
 
 type Room struct {
-	Members  []*Peer
+	Members  map[int]*Peer
 	Speakers []*Peer
 	Topic    string
 
@@ -30,13 +30,12 @@ func (r *Room) ContainsMember(peer *Peer) bool {
 	return false
 }
 
+func (r *Room) AddMember(peer *Peer) {
+	r.Members[peer.Key] = peer
+}
+
 func (r *Room) RemoveMember(s *Server, name string, peer *Peer) {
-	for i, member := range r.Members {
-		if member == peer {
-			r.Members = append(r.Members[:i], r.Members[i+1:]...)
-			break
-		}
-	}
+	delete(r.Members, peer.Key)
 
 	if len(r.Members) == 0 {
 		delete(s.Rooms, name)
