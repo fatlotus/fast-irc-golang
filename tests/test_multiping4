@@ -602,22 +602,12 @@ S <- 1  PING
 S -> 1  :s PONG user2
 S <- 0  PING
 S -> 0  :s PONG user1
+S <- 2  PING
+S -> 2  :s PONG user3
 S <- 3  PING
 S -> 3  :s PONG user4
 S <- 4  PING
 S -> 4  :s PONG user5
-S <- 16  PING
-S -> 16  :s PONG user17
-S <- 19  PING
-S -> 19  :s PONG user20
-S <- 2  PING
-S -> 2  :s PONG user3
-S <- 25  PING
-S -> 25  :s PONG user26
-S <- 28  PING
-S -> 28  :s PONG user29
-S <- 33  PING
-S -> 33  :s PONG user34
 S <- 5  PING
 S -> 5  :s PONG user6
 S <- 6  PING
@@ -630,6 +620,12 @@ S <- 9  PING
 S -> 9  :s PONG user10
 S <- 10  PING
 S -> 10  :s PONG user11
+S <- 19  PING
+S -> 19  :s PONG user20
+S <- 23  PING
+S -> 23  :s PONG user24
+S <- 25  PING
+S -> 25  :s PONG user26
 S <- 11  PING
 S -> 11  :s PONG user12
 S <- 12  PING
@@ -640,6 +636,8 @@ S <- 14  PING
 S -> 14  :s PONG user15
 S <- 15  PING
 S -> 15  :s PONG user16
+S <- 16  PING
+S -> 16  :s PONG user17
 S <- 17  PING
 S -> 17  :s PONG user18
 S <- 18  PING
@@ -650,14 +648,14 @@ S <- 21  PING
 S -> 21  :s PONG user22
 S <- 22  PING
 S -> 22  :s PONG user23
-S <- 23  PING
-S -> 23  :s PONG user24
 S <- 24  PING
 S -> 24  :s PONG user25
 S <- 26  PING
 S -> 26  :s PONG user27
 S <- 27  PING
 S -> 27  :s PONG user28
+S <- 28  PING
+S -> 28  :s PONG user29
 S <- 29  PING
 S -> 29  :s PONG user30
 S <- 30  PING
@@ -666,5 +664,7 @@ S <- 31  PING
 S -> 31  :s PONG user32
 S <- 32  PING
 S -> 32  :s PONG user33
+S <- 33  PING
+S -> 33  :s PONG user34
 S <- 34  PING
 S -> 34  :s PONG user35

@@ -176,45 +176,45 @@ S -> 10  :user9!u@h JOIN #test3
 S -> 10  :s 353 user9 = #test3 :@user7 user8 user9
 S -> 10  :s 366 user9 #test3 3
 S <- 2  WHO *
-S -> 2  :s 352 user1 * 2 3 4 user9 H 7
-S -> 2  :s 352 user1 * 2 3 4 user10 H 7
-S -> 2  :s 352 user1 * 2 3 4 user11 H 7
-S -> 2  :s 352 user1 * 2 3 4 user5 H 7
 S -> 2  :s 352 user1 * 2 3 4 user6 H 7
+S -> 2  :s 352 user1 * 2 3 4 user10 H 7
+S -> 2  :s 352 user1 * 2 3 4 user5 H 7
+S -> 2  :s 352 user1 * 2 3 4 user4 H 7
 S -> 2  :s 352 user1 * 2 3 4 user7 H 7
 S -> 2  :s 352 user1 * 2 3 4 user8 H 7
-S -> 2  :s 352 user1 * 2 3 4 user4 H 7
+S -> 2  :s 352 user1 * 2 3 4 user9 H 7
+S -> 2  :s 352 user1 * 2 3 4 user11 H 7
 S -> 2  :s 315 user1 * :End of WHO list
 S <- 5  WHO *
-S -> 5  :s 352 user4 * 2 3 4 user7 H 7
-S -> 5  :s 352 user4 * 2 3 4 user8 H 7
-S -> 5  :s 352 user4 * 2 3 4 user2 H 7
-S -> 5  :s 352 user4 * 2 3 4 user3 H 7
-S -> 5  :s 352 user4 * 2 3 4 user9 H 7
 S -> 5  :s 352 user4 * 2 3 4 user10 H 7
+S -> 5  :s 352 user4 * 2 3 4 user8 H 7
+S -> 5  :s 352 user4 * 2 3 4 user9 H 7
 S -> 5  :s 352 user4 * 2 3 4 user11 H 7
 S -> 5  :s 352 user4 * 2 3 4 user1 H 7
+S -> 5  :s 352 user4 * 2 3 4 user2 H 7
+S -> 5  :s 352 user4 * 2 3 4 user3 H 7
+S -> 5  :s 352 user4 * 2 3 4 user7 H 7
 S -> 5  :s 315 user4 * :End of WHO list
 S <- 8  WHO *
 S -> 8  :s 352 user7 * 2 3 4 user10 H 7
+S -> 8  :s 352 user7 * 2 3 4 user5 H 7
+S -> 8  :s 352 user7 * 2 3 4 user6 H 7
+S -> 8  :s 352 user7 * 2 3 4 user3 H 7
+S -> 8  :s 352 user7 * 2 3 4 user4 H 7
 S -> 8  :s 352 user7 * 2 3 4 user11 H 7
 S -> 8  :s 352 user7 * 2 3 4 user1 H 7
 S -> 8  :s 352 user7 * 2 3 4 user2 H 7
-S -> 8  :s 352 user7 * 2 3 4 user3 H 7
-S -> 8  :s 352 user7 * 2 3 4 user4 H 7
-S -> 8  :s 352 user7 * 2 3 4 user5 H 7
-S -> 8  :s 352 user7 * 2 3 4 user6 H 7
 S -> 8  :s 315 user7 * :End of WHO list
 S <- 0  WHO *
-S -> 0  :s 352 user10 * 2 3 4 user10 H 7
+S -> 0  :s 352 user10 * 2 3 4 user9 H 7
 S -> 0  :s 352 user10 * 2 3 4 user11 H 7
 S -> 0  :s 352 user10 * 2 3 4 user1 H 7
-S -> 0  :s 352 user10 * 2 3 4 user9 H 7
-S -> 0  :s 352 user10 * 2 3 4 user7 H 7
-S -> 0  :s 352 user10 * 2 3 4 user8 H 7
 S -> 0  :s 352 user10 * 2 3 4 user2 H 7
 S -> 0  :s 352 user10 * 2 3 4 user3 H 7
 S -> 0  :s 352 user10 * 2 3 4 user4 H 7
+S -> 0  :s 352 user10 * 2 3 4 user7 H 7
+S -> 0  :s 352 user10 * 2 3 4 user8 H 7
+S -> 0  :s 352 user10 * 2 3 4 user10 H 7
 S -> 0  :s 352 user10 * 2 3 4 user5 H 7
 S -> 0  :s 352 user10 * 2 3 4 user6 H 7
 S -> 0  :s 315 user10 * :End of WHO list

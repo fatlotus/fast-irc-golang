@@ -179,5 +179,5 @@ S <- 2  NAMES
 S -> 2  :s 353 user1 = #test1 :@user1 user2 user3
 S -> 2  :s 353 user1 = #test2 :@user4 user5 user6
 S -> 2  :s 353 user1 = #test3 :@user7 user8 user9
-S -> 2  :s 353 user1 * * :user11 user10
+S -> 2  :s 353 user1 * * :user10 user11
 S -> 2  :s 366 user1 * 3

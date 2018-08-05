@@ -118,13 +118,13 @@ S -> 9  :s 253 user10 0 :unknown connection(s)
 S -> 9  :s 254 user10 0 :channels formed
 S -> 9  :s 255 user10 :I have 10 clients and 0 servers
 S -> 9  :s 422 user10 :MOTD File is missing
-S <- 0  PING
-S -> 0  :s PONG user1
-S <- 4  PING
-S -> 4  :s PONG user5
-S <- 2  PING
-S -> 2  :s PONG user3
-S <- 3  PING
-S -> 3  :s PONG user4
 S <- 1  PING
 S -> 1  :s PONG user2
+S <- 0  PING
+S -> 0  :s PONG user1
+S <- 3  PING
+S -> 3  :s PONG user4
+S <- 2  PING
+S -> 2  :s PONG user3
+S <- 4  PING
+S -> 4  :s PONG user5

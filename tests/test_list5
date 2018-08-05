@@ -188,7 +188,7 @@ S -> 8  :user7!u@h TOPIC #test3 :Topic Three
 S -> 9  :user7!u@h TOPIC #test3 :Topic Three
 S -> 10  :user7!u@h TOPIC #test3 :Topic Three
 S <- 0  LIST
-S -> 0  :s 322 user10 #test1 3 :Topic One
 S -> 0  :s 322 user10 #test2 3 :Topic Two
 S -> 0  :s 322 user10 #test3 3 :Topic Three
+S -> 0  :s 322 user10 #test1 3 :Topic One
 S -> 0  :s 323 user10 :End of LIST

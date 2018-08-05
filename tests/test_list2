@@ -176,7 +176,7 @@ S -> 10  :user9!u@h JOIN #test3
 S -> 10  :s 353 user9 = #test3 :@user7 user8 user9
 S -> 10  :s 366 user9 #test3 3
 S <- 2  LIST
+S -> 2  :s 322 user1 #test3 3 :No topic set
 S -> 2  :s 322 user1 #test1 3 :No topic set
 S -> 2  :s 322 user1 #test2 3 :No topic set
-S -> 2  :s 322 user1 #test3 3 :No topic set
 S -> 2  :s 323 user1 :End of LIST

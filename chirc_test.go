@@ -129,7 +129,7 @@ func RunTestCase(motd string, addr string, inputs []string) ([]string, error) {
 		subs := make([][]string, len(conns))
 		for cid, conn := range conns {
 			go func(conn net.Conn, cid int) {
-				conn.SetReadDeadline(time.Now().Add(5 * time.Millisecond))
+				conn.SetReadDeadline(time.Now().Add(10 * time.Millisecond))
 				buf, err := ioutil.ReadAll(conn)
 
 				nerr, ok := err.(net.Error)

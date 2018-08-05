@@ -554,6 +554,10 @@ func (s *Server) SetMode(sender *Peer, subject, mode string) error {
 			return &NotOperator{sender.Nick, subject}
 		}
 
+		if len(mode) != 2 {
+			return &UnknownChannelMode{sender.Nick, subject, '?'}
+		}
+
 		enable := mode[0] == '+'
 		switch mode[1] {
 		case 'm':
