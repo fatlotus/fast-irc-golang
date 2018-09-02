@@ -674,6 +674,7 @@ func (s *Server) ListenAndServe(addr string) error {
 	if err != nil {
 		return err
 	}
+	defer s.Listener.Close()
 	return s.Serve()
 }
 
