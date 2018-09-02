@@ -54,9 +54,19 @@ func NewClient(nick, addr string) (*Client, error) {
 	}
 	conn.(*net.TCPConn).SetNoDelay(true)
 	fmt.Fprintf(conn, "NICK %s\r\nUSER %s * * :%s\r\n", nick, nick, nick)
-	return &Client{
+	c := &Client{
 		Conn:   conn,
 		Reader: bufio.NewReader(conn),
 		Writer: bufio.NewWriter(conn),
-	}, nil
+	}
+	for {
+		line, err := c.Reader.ReadString('\n')
+		if err != nil {
+			panic(err)
+		}
+		if strings.Contains(line, "422") {
+			break
+		}
+	}
+	return c, nil
 }
