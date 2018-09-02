@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/fatlotus/irc_go"
+	. "github.com/fatlotus/fast-irc-golang"
 
 	"github.com/andreyvit/diff"
 )

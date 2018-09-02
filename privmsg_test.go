@@ -5,7 +5,7 @@ import (
 	"sync"
 	"testing"
 
-	. "github.com/fatlotus/irc_go"
+	. "github.com/fatlotus/fast-irc-golang"
 )
 
 func must(b *testing.B, err error) {
