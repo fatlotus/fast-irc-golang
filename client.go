@@ -17,6 +17,20 @@ func (c *Client) PrivMsg(nick, message string) {
 	fmt.Fprintf(c.Writer, "PRIVMSG %s :%s\r\n", nick, message)
 }
 
+func (c *Client) Join(channel string) {
+	fmt.Fprintf(c.Writer, "JOIN %s\r\n", channel)
+	c.Writer.Flush()
+	for {
+		line, err := c.Reader.ReadString('\n')
+		if err != nil {
+			panic(err)
+		}
+		if strings.Contains(line, "JOIN") {
+			return
+		}
+	}
+}
+
 func (c *Client) ReadMsg() {
 	for {
 		line, err := c.Reader.ReadString('\n')

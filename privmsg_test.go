@@ -96,3 +96,42 @@ func BenchmarkPrivmsgLocalSocket(b *testing.B) {
 
 	wg.Wait()
 }
+
+func BenchmarkHighFanout(b *testing.B) {
+	s := NewServer()
+
+	err := s.Listen("localhost:0")
+	if err != nil {
+		b.Fatal(err)
+	}
+	defer s.Listener.Close()
+
+	addr := s.Listener.Addr().String()
+	go s.Serve()
+
+	sender, err := NewClient("sender", addr)
+	if err != nil {
+		b.Fatal(err)
+	}
+
+	sender.Join("#group")
+
+	receivers := []*Client{}
+	fanout := 100
+	for i := 0; i < fanout; i++ {
+		receiver, err := NewClient(fmt.Sprintf("receiver%d", i), addr)
+		if err != nil {
+			b.Fatal(err)
+		}
+		receiver.Join("#group")
+		receivers = append(receivers, receiver)
+	}
+
+	for i := 0; i < b.N/fanout; i++ {
+		sender.PrivMsg("#group", "hello world")
+		sender.Writer.Flush()
+		for _, reciever := range receivers {
+			reciever.ReadMsg()
+		}
+	}
+}
