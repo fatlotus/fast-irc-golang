@@ -15,7 +15,8 @@ func (p *Peer) Write(msg string) {
 	if p.Server.Trace != nil {
 		fmt.Fprintf(p.Server.Trace, "S -> %d  %s\n", p.Key, msg[:len(msg)-2])
 	}
-	p.Conn.Write([]byte(msg))
+
+	p.Output.Write([]byte(msg))
 }
 
 func (p *Peer) SayFrom(source, format string, args ...interface{}) {
@@ -80,6 +81,7 @@ func (p *Peer) HandleLine(line []byte) (done bool) {
 
 func (p *Peer) HandleInput() {
 	defer p.Conn.Close()
+	defer p.Output.Close()
 	defer p.Server.RemovePeer(p)
 
 	sc := bufio.NewScanner(p.Conn)

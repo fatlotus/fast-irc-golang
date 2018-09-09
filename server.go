@@ -5,6 +5,8 @@ import (
 	"io"
 	"net"
 	"sync"
+
+	"github.com/fatlotus/batchwriter"
 )
 
 type Server struct {
@@ -50,7 +52,7 @@ func (s *Server) AddPeer(n net.Conn) *Peer {
 		Conn:   n,
 		Key:    s.NextPeerKey,
 		Server: s,
-		Output: make(chan string, 100000),
+		Output: batchwriter.New(n),
 	}
 	s.Peers[s.NextPeerKey] = p
 	s.NextPeerKey += 1

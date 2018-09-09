@@ -2,7 +2,6 @@ package irc_go_test
 
 import (
 	"fmt"
-	"sync"
 	"testing"
 
 	. "github.com/fatlotus/fast-irc-golang"
@@ -55,46 +54,32 @@ func BenchmarkPrivmsgLocalSocket(b *testing.B) {
 	addr := s.Listener.Addr().String()
 	go s.Serve()
 
-	streams := 10
-	wg := sync.WaitGroup{}
-	for s := 0; s < streams; s++ {
-		wg.Add(1)
-		go func(s int) {
-			defer wg.Done()
-
-			name_a := fmt.Sprintf("a%d", s)
-			name_b := fmt.Sprintf("b%d", s)
-
-			client_a, err := NewClient(name_a, addr)
-			if err != nil {
-				b.Fatal(err)
-			}
-			client_b, err := NewClient(name_b, addr)
-			if err != nil {
-				b.Fatal(err)
-			}
-
-			client_b.PrivMsg(name_a, "x")
-			client_b.Writer.Flush()
-			client_a.ReadMsg()
-
-			batch := 200
-			for i := 0; i < b.N/streams; i += batch {
-				for i := 0; i < batch; i++ {
-					client_a.PrivMsg(name_b, "hi")
-				}
-				client_a.Writer.Flush()
-				for i := 0; i < batch; i++ {
-					client_b.ReadMsg()
-				}
-			}
-
-			client_a.Close()
-			client_b.Close()
-		}(s)
+	client_a, err := NewClient("a", addr)
+	if err != nil {
+		b.Fatal(err)
+	}
+	client_b, err := NewClient("b", addr)
+	if err != nil {
+		b.Fatal(err)
 	}
 
-	wg.Wait()
+	client_b.PrivMsg("a", "x")
+	client_b.Writer.Flush()
+	client_a.ReadMsg()
+
+	batch := 200
+	for i := 0; i < b.N; i += batch {
+		for i := 0; i < batch; i++ {
+			client_a.PrivMsg("b", "hi")
+		}
+		client_a.Writer.Flush()
+		for i := 0; i < batch; i++ {
+			client_b.ReadMsg()
+		}
+	}
+
+	client_a.Close()
+	client_b.Close()
 }
 
 func BenchmarkHighFanout(b *testing.B) {
@@ -117,7 +102,7 @@ func BenchmarkHighFanout(b *testing.B) {
 	sender.Join("#group")
 
 	receivers := []*Client{}
-	fanout := 100
+	fanout := 30
 	for i := 0; i < fanout; i++ {
 		receiver, err := NewClient(fmt.Sprintf("receiver%d", i), addr)
 		if err != nil {
@@ -133,5 +118,10 @@ func BenchmarkHighFanout(b *testing.B) {
 		for _, reciever := range receivers {
 			reciever.ReadMsg()
 		}
+	}
+
+	sender.Close()
+	for _, receiver := range receivers {
+		receiver.Close()
 	}
 }

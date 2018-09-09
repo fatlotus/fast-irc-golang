@@ -6,11 +6,13 @@ import (
 	"log"
 	"net"
 	"os"
+
+	"github.com/fatlotus/batchwriter"
 )
 
 type Peer struct {
 	Conn   net.Conn
-	Output chan string
+	Output *batchwriter.Writer
 
 	Key    int
 	Server *Server
