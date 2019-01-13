@@ -67,8 +67,10 @@ func TestServer(t *testing.T) {
 	}
 	for _, test := range tests {
 		name := test.Name()
+		if name[0] == '_' {
+			continue
+		}
 		t.Run(name, func(t *testing.T) {
-			t.Parallel()
 			err := RunTestFile("tests/"+name, t)
 			if err != nil {
 				t.Error(err)
