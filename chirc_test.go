@@ -185,6 +185,28 @@ func CheckForServerLeaks(s *Server, t *testing.T) {
 	}
 }
 
+type DiffError struct {
+	Path             string
+	Expected, Actual []string
+}
+
+func (d DiffError) Error() string {
+	result := fmt.Sprintf("\nFAIL %s:\n", d.Path)
+
+	for _, line := range diff.LineDiffAsLines(
+		strings.Join(d.Actual, "\n"), strings.Join(d.Expected, "\n")) {
+		if line[0] == '+' {
+			result += fmt.Sprintf("\033[32m%s\033[0m\n", line)
+		} else if line[0] == '-' {
+			result += fmt.Sprintf("\033[31m%s\033[0m\n", line)
+		} else {
+			result += fmt.Sprintf("%s\n", line)
+		}
+	}
+	result += "\n"
+	return result
+}
+
 func RunTestFile(path string, t *testing.T) error {
 	// create a temporary motd file
 	tmpdir, err := ioutil.TempDir("", "motd")
@@ -218,18 +240,17 @@ func RunTestFile(path string, t *testing.T) error {
 		return err
 	}
 
+	s.Listener.Close()
+
 	CheckForServerLeaks(s, t)
 
 	actual = NormalizeTestCase(actual)
 	expected = NormalizeTestCase(expected)
 
-	if len(actual) != len(expected) {
-		t.Fail()
-	} else {
+	if len(actual) == len(expected) {
 		passed := true
-		for i, actual_line := range actual {
-			if actual_line != expected[i] {
-				t.Fail()
+		for i := range actual {
+			if actual[i] != expected[i] {
 				passed = false
 			}
 		}
@@ -238,19 +259,8 @@ func RunTestFile(path string, t *testing.T) error {
 		}
 	}
 
-	fmt.Printf("\nFAIL %s:\n", path)
-	for _, line := range diff.LineDiffAsLines(
-		strings.Join(actual, "\n"), strings.TrimSpace(string(text))) {
-		if line[0] == '+' {
-			fmt.Printf("\033[32m%s\033[0m\n", line)
-		} else if line[0] == '-' {
-			fmt.Printf("\033[31m%s\033[0m\n", line)
-		} else {
-			fmt.Printf("%s\n", line)
-		}
-	}
-	fmt.Printf("\n")
-	return nil
+	t.Fail()
+	return &DiffError{Path: path, Actual: actual, Expected: expected}
 }
 
 func TestServer(t *testing.T) {
@@ -262,7 +272,10 @@ func TestServer(t *testing.T) {
 		name := test.Name()
 		t.Run(name, func(t *testing.T) {
 			t.Parallel()
-			RunTestFile("tests/"+name, t)
+			err := RunTestFile("tests/"+name, t)
+			if err != nil {
+				t.Error(err)
+			}
 		})
 	}
 }
