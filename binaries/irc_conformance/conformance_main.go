@@ -6,7 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"path"
 	"regexp"
+	"runtime"
 	"strings"
 
 	"github.com/fatlotus/fast-irc-golang/testutil"
@@ -53,6 +55,9 @@ func RunTestCaseOnce(path, cmd string, args []string) error {
 
 func main() {
 	dir := "tests"
+	if _, file, _, ok := runtime.Caller(0); ok {
+		dir = path.Clean(path.Join(file, "..", "..", "..", "tests"))
+	}
 	tests, err := ioutil.ReadDir(dir)
 	if err != nil {
 		fmt.Printf("%s\n", err)
@@ -62,9 +67,9 @@ func main() {
 		if test.Name()[0] == '_' {
 			continue
 		}
-		err := RunTestCaseOnce(dir+"/"+test.Name(), os.Args[1], os.Args[2:])
+		err := RunTestCaseOnce(path.Join(dir, test.Name()), os.Args[1], os.Args[2:])
 		if err != nil {
-			fmt.Printf("\n%s:\n%s\n", dir+"/"+test.Name(), err)
+			fmt.Printf("\n%s:\n%s\n", test.Name(), err)
 		} else {
 			fmt.Printf(".")
 		}
