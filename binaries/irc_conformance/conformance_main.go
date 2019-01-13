@@ -70,6 +70,10 @@ func main() {
 		err := RunTestCaseOnce(path.Join(dir, test.Name()), os.Args[1], os.Args[2:])
 		if err != nil {
 			fmt.Printf("\n%s:\n%s\n", test.Name(), err)
+			if _, ok := err.(*testutil.DiffError); !ok {
+				// if there's a a test harness issue, we might as well end early
+				break
+			}
 		} else {
 			fmt.Printf(".")
 		}
