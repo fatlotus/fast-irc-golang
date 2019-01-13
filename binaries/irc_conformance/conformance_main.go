@@ -46,11 +46,15 @@ func RunTestCaseOnce(path, cmd string, args []string) error {
 		fmt.Printf("%s\n", scanner.Text())
 	}
 
-	err = child.Wait()
+	if err := child.Process.Kill(); err != nil {
+		return err
+	}
+
+	child.Wait()
 	for scanner.Scan() {
 		fmt.Printf("%s\n", scanner.Text())
 	}
-	return err
+	return nil
 }
 
 func main() {
@@ -63,6 +67,7 @@ func main() {
 		fmt.Printf("%s\n", err)
 		return
 	}
+	failures := 0
 	for _, test := range tests {
 		if test.Name()[0] == '_' {
 			continue
@@ -72,6 +77,10 @@ func main() {
 			fmt.Printf("\n%s:\n%s\n", test.Name(), err)
 			if _, ok := err.(*testutil.DiffError); !ok {
 				// if there's a a test harness issue, we might as well end early
+				break
+			}
+			failures += 1
+			if failures > 5 {
 				break
 			}
 		} else {
